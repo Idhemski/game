@@ -1,0 +1,36 @@
+#import de modules
+import pygame
+pygame.init()
+
+
+#variables
+fin_jeu = False
+marcher = True
+
+
+
+#fenetre
+fenetre = pygame.display.set_mode((1000,1000))
+x , y = 30
+
+
+#jeu
+while marcher:
+    if not fin_jeu:
+        
+        #evenement
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                marcher = False
+                fin_jeu = True
+            
+    #mouvement
+    pressed = pygame.key.get_pressed()
+    if pressed[pygame.K_UP]:
+        y -= 3
+    if pressed[pygame.K_DOWN]:
+        y += 3
+    if pressed[pygame.K_LEFT]:
+        x -= 3
+    if pressed[pygame.K_RIGHT]:
+        x += 3

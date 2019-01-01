@@ -27,20 +27,34 @@ changer_couleur = 0
 couleur_b = py.couleurs["rouge"]
 fin_du_jeu = False
 fin = 0
+sprite_chat = pygame.image.load("melo.jpg")
+
+
 
 #Police et début d'écriture
 myfont = pygame.font.SysFont("papyrus", 40)
 texte_fin = pygame.font.SysFont("papyrus", 40)
+
+
 
 #fentre principale
 taille_fenetre = (1000 , 1000)
 fenetre = pygame.display.set_mode(taille_fenetre)
 
 
+#musique
+pygame.mixer.music.load('Undertale Asgore Theme.mp3')
+pygame.mixer.music.play(0)
+
 #programme
 
 while running:
     if not fin_du_jeu:
+        
+        
+        
+        
+        
         # Evenements 
         for event in pygame.event.get():
                
@@ -48,7 +62,7 @@ while running:
                     running = False
                     fin_du_jeu = True
             
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_c:
                 ind_couleur = (ind_couleur + 1)%3
     
         
@@ -125,11 +139,19 @@ while running:
                     running = False
                     fin_du_jeu = True
         
+      
+        
+        
+        #fin du jeu
         dure = fin - debut
         fenetre.fill(py.couleurs["noir"])
-        label = texte_fin.render("Congratulations, your score {}".format(dure), 1, py.couleurs["blanc"])
+        label = texte_fin.render("Congratulations, your score {}".format(int(dure)), 1, py.couleurs["blanc"])
         fenetre.blit(label, (150, 30))
         pygame.display.flip()
 
+
+
+
+#fermeture de la fenetre
 pygame.quit()
 sys.exit()
