@@ -26,6 +26,7 @@ dio = pygame.time.Clock()
 image_a = pygame.image.load('melo.jpg')
 image_height = image_a.get_rect().size[1]
 image_b = pygame.image.load('cat.jpg')
+image_height_b = image_b.get_rect().size[1]
 
 
 
@@ -51,13 +52,14 @@ while running:
         
         
         #rectage
-        mescollisions = [image_b]
-        pos_image_a = image_a.get_rect()
-        pos_image_b = image_b.get_rect()
+        A = pygame.Rect(x, y, image_height, image_height)
+        B = pygame.Rect(500, 500, image_height_b, image_height_b)
         
         #collision
-        if pos_image_a.collidelist(pos_image_b) == -1 :
-            running = False
+        if A.colliderect(B):
+            fin_jeu = True
+        
+        
         
 
         #affichage
@@ -66,6 +68,13 @@ while running:
         fenetre.blit(image_a, (x, y))
         pygame.display.flip()
         dio.tick(60)
+   
+    else  :
+        for event in pygame.event.get():
+               
+            if event.type == pygame.QUIT:
+                    running = False
+                    fin_jeu = True
 
 #quittage de la fenetre
 pygame.quit()
