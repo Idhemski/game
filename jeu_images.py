@@ -13,6 +13,11 @@ vert = (0, 255, 0)
 
 
 
+#notice
+#Le A est celui que nous allons bouger
+#le B est celui dont nous n'auront aucun control
+
+
 #variables 
 fin_jeu = False
 running = True
@@ -23,15 +28,18 @@ dio = pygame.time.Clock()
 
 
 #images
-image_a = pygame.image.load('melo.jpg')
+image_a = pygame.image.load('char.png')       
 image_height = image_a.get_rect().size[1]
-image_b = pygame.image.load('cat.jpg')
+image_b = pygame.image.load('cat.png')                                          #les dimensions seront changées
 image_height_b = image_b.get_rect().size[1]
 
 
 
+
+
+
 #fenetre
-resolution = (1000, 1000)
+resolution = [1000, 1000]
 fenetre = pygame.display.set_mode(resolution)
 
 #jeu
@@ -43,17 +51,26 @@ while running:
             if event.type == pygame.QUIT:
                 running = False
         
-        #bougeages       
+        #mouvement      
         pressed = pygame.key.get_pressed()
-        if pressed[pygame.K_UP]  and y >= 0 : y -= 2
-        if pressed[pygame.K_DOWN] and y + image_height <= resolution[1] : y += 2
-        if pressed[pygame.K_LEFT] and x >= 0 : x -= 2
-        if pressed[pygame.K_RIGHT] and x + image_height <= resolution[0]  : x += 2
+        if pressed[pygame.K_UP]  and y >= 0 :
+            y -= 2
+            
+        if pressed[pygame.K_DOWN] and y + image_height <= resolution[1] :
+            y += 2
+            
+        if pressed[pygame.K_LEFT] and x >= 0 : 
+            x -= 2
+            
+        if pressed[pygame.K_RIGHT] and x + image_height <= resolution[0]  :
+            x += 2
         
         
         #rectage
         A = pygame.Rect(x, y, image_height, image_height)
         B = pygame.Rect(500, 500, image_height_b, image_height_b)
+        
+        
         
         #collision
         if A.colliderect(B):
@@ -64,8 +81,8 @@ while running:
 
         #affichage
         fenetre.fill(noir)
-        fenetre.blit(image_b, (500, 500))
-        fenetre.blit(image_a, (x, y))
+        fenetre.blit(image_b, [500, 500])
+        fenetre.blit(image_a, [x, y])
         pygame.display.flip()
         dio.tick(60)
    
